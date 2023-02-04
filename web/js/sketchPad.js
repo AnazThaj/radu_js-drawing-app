@@ -42,6 +42,20 @@ class SketchPad {
     this.canvas.onmouseup = () => {
       this.isDrawing = false;
     };
+
+    this.canvas.ontouchstart = (evt) => {
+      const loc = evt.touches[0];
+      this.canvas.onmousedown(loc);
+    };
+
+    this.canvas.ontouchmove = (evt) => {
+      const loc = evt.touches[0];
+      this.canvas.onmousemove(loc);
+    };
+
+    this.canvas.ontouchend = (evt) => {
+      this.canvas.onmouseup();
+    };
   }
 
   #redraw() {
