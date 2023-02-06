@@ -9,7 +9,7 @@ constants.SAMPLES = constants.DATASET_DIR + "/samples.json";
 
 const fs = require("fs");
 
-const fileName = fs.readdirSync(constants.RAW_DIR);
+const fileNames = fs.readdirSync(constants.RAW_DIR);
 const samples = [];
 let id = 1;
 
@@ -23,6 +23,17 @@ fileNames.forEach((fn) => {
       student_name: student,
       student_id: session,
     });
+
+    fs.writeFileSync(
+      constants.JSON_DIR + "/" + id + ".json",
+      JSON.stringify(drawings[label]),
+    );
+
+    fs.writeFileSync(
+      constants.JSON_DIR + "/" + id + ".json",
+      JSON.stringify(drawings[label]),
+    );
+
     id++;
   }
 });
