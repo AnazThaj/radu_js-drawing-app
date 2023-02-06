@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Data Viewer</title>
+    <link rel="icon" type="" href="#" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <h1>Data Viewer</h1>
+    <div id="container"></div>
+    <script src="../common/js_objects/samples.js"></script>
+    <script src="../common/constants.js"></script>
+    <script src="../common/utils.js"></script>
+
+    <script>
+      const groups = utils.groupBy(samples, "student_id");
+      console.log(groups);
+    </script>
+  </body>
+</html>
