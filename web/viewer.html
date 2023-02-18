@@ -50,10 +50,10 @@
         data.addColumn({ type: "string", role: "style" });
         data.addRows(samples.map((s) => [...s.point, utils.styles[s.label]]));
 
-        const chart = new google.visualization.ScatterChart(chartContainer);
-        chart.draw(data, options);
-        // const chart = new google.charts.Scatter(chartContainer);
-        // chart.draw(data, google.charts.Scatter.convertOptions(options));
+        // const chart = new google.visualization.ScatterChart(chartContainer);
+        // chart.draw(data, options);
+        const chart = new google.charts.Scatter(chartContainer);
+        chart.draw(data, google.charts.Scatter.convertOptions(options));
       });
     </script>
   </body>
