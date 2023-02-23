@@ -12,13 +12,17 @@
     <div id="chartContainer"></div>
     <table id="dataTable"></table>
     <script src="./math.js"></script>
+    <script src="./chart.js"></script>
     <script>
       const N = 1000;
       const samples = [];
       for (let i = 1; i <= N; i++) {
         const type = Math.random() < 0.5 ? "basic" : "sport";
-        const km = Math.floor(math.lerp(3000, 300000, Math.random()));
-        const price = Math.floor(math.lerp(9000, 900, Math.random()));
+        const km = math.lerp(3000, 300000, Math.random());
+        const price =
+          math.remap(3000, 300000, 9000, 900, km) +
+          math.lerp(-2000, 2000, Math.random()) +
+          (type == "basic" ? 0 : 5000);
 
         samples.push({
           id: i,
@@ -26,6 +30,17 @@
           point: [km, price],
         });
       }
+
+      const option = {
+        size: 250,
+        axesLabels: ["kilometers", "Price"],
+        styles: {
+          basic: "gray",
+          sport: "red",
+        },
+      };
+
+      const chart = new Chart(chartContainer, samples, options);
 
       const header = dataTable.createTHead();
       const tr = header.insertRow();
