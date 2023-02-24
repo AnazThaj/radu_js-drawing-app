@@ -54,9 +54,41 @@ class Chart {
     const { ctx, canvas } = this;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    this.#drawAxes();
     ctx.globalAlpha = this.transparency;
     this.#drawSamples();
     ctx.globalAlpha = 1;
+  }
+
+  #drawAxes() {
+    const { ctx, canvas, axesLabels, margin } = this;
+    const { left, right, top, bottom } = this.pixelBounds;
+
+    graphics.drawText(ctx, {
+      text: axesLabels[0],
+      loc: [canvas.width / 2, bottom + margin / 2],
+      size: margin * 0.6,
+    });
+
+    ctx.save();
+    ctx.translate(left - margin / 2, canvas.height / 2);
+    ctx.rotate(-Math.PI / 2);
+    graphics.drawText(ctx, {
+      text: axesLabels[1],
+      loc: [0, 0],
+      size: margin * 0.6,
+    });
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.moveTo(left, top);
+    ctx.lineTo(left, bottom);
+    ctx.lineTo(right, bottom);
+    ctx.setLineDash([5, 4]);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "lightgray";
+    ctx.stroke();
+    ctx.setLineDash([]);
   }
 
   #drawSamples() {
@@ -68,4 +100,3 @@ class Chart {
     }
   }
 }
-
